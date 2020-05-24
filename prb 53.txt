@@ -1,0 +1,113 @@
+Magic square
+A magic square is an arrangement of numbers (usually integers) in a square grid, there numbers in the forward and backward main diagonals, all add up to the same number. Write a program to find whether a given matrix is a magic square or not.
+Input Format:
+
+The input consists of (n*n+1) integers. 
+
+The first integer corresponds to the number of rows/columns in the matrix. 
+
+The remaining integers correspond to the elements in the matrix. 
+
+The elements are read in row-wise order, the first row first, then second row and so on. 
+
+Assume that the maximum value of m and n is 5.
+
+Output Format:
+
+Print yes if it is a magic square. Print no if it is not a magic square.
+
+Sample Input:
+
+2
+
+4 5
+
+5 4
+
+Sample Output:
+
+No
+
+
+
+
+
+
+
+
+
+
+// C++ program to check whether a given 
+// matrix is magic matrix or not 
+#include <bits/stdc++.h> 
+
+#define N 3 
+using namespace std; 
+
+// Returns true if mat[][] is magic 
+// square, else returns false. 
+bool isMagicSquare(int mat[][N]) 
+{ 
+	// calculate the sum of 
+	// the prime diagonal 
+	int sum = 0,sum2=0; 
+	for (int i = 0; i < N; i++) 
+		sum = sum + mat[i][i]; 
+	// the secondary diagonal 
+	for (int i = 0; i < N; i++) 
+		sum2 = sum2 + mat[i][N-1-i]; 
+
+	if(sum!=sum2) 
+		return false; 
+
+	// For sums of Rows 
+	for (int i = 0; i < N; i++) { 
+		
+		int rowSum = 0;	 
+		for (int j = 0; j < N; j++) 
+			rowSum += mat[i][j]; 
+		
+		// check if every row sum is 
+		// equal to prime diagonal sum 
+		if (rowSum != sum) 
+			return false; 
+	} 
+
+	// For sums of Columns 
+	for (int i = 0; i < N; i++) { 
+		
+		int colSum = 0;	 
+		for (int j = 0; j < N; j++) 
+			colSum += mat[j][i]; 
+
+		// check if every column sum is 
+		// equal to prime diagonal sum 
+		if (sum != colSum) 
+		return false; 
+	} 
+
+	return true; 
+} 
+
+// driver program to 
+// test above function 
+int main() 
+{   int mat[10][N];
+	int r;
+	cin>>r;
+	for(int i=0;i<r;i++)
+	{
+	    for(int j=0;j<r;j++)
+	    {
+	        cin>>mat[i][j];
+	    }
+	}
+	
+	
+	if (isMagicSquare(mat)) 
+		cout << "Yes"; 
+	else
+		cout << "No"; 
+	
+	return 0; 
+} 
